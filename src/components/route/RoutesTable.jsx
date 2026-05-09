@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const routesData = [
   {
@@ -63,6 +64,7 @@ const StatusBadge = ({ status }) => {
 export default function RoutesTable({ onRouteClick }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [hoveredRow, setHoveredRow] = useState(null);
+  const navigate = useNavigate();
 
   const filteredRoutes = routesData.filter(route =>
     route.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -109,7 +111,10 @@ export default function RoutesTable({ onRouteClick }) {
             {filteredRoutes.map((route) => (
               <tr 
                 key={route.id}
-                onClick={() => onRouteClick && onRouteClick(route)}
+                onClick={() => {
+                  onRouteClick && onRouteClick(route);
+                  navigate(`/routes/${route.name}`);
+                }}
                 onMouseEnter={() => setHoveredRow(route.id)}
                 onMouseLeave={() => setHoveredRow(null)}
                 className={`

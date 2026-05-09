@@ -56,7 +56,7 @@ export default function RoutesWorkspace({ projectId, showEmpty = false }) {
           ${sidebarCollapsed ? 'pl-16' : 'pl-56'}
         `}
       >
-        <div className="p-8 max-w-6xl">
+        <div className="p-8 max-w-7xl">
           {activeTab === 'routes' && (
             <>
               <ProjectHeader 
