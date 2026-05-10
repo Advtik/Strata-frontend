@@ -1,7 +1,32 @@
-const metrics = [
+
+
+export default function RoutesMetricsStrip({ routes }) {
+
+  const totalRoutes = routes.length;
+
+  const totalRequests = routes.reduce(
+    (sum, route) => sum + route.requests,
+    0
+  );
+
+  const healthyRoutes = routes.filter(
+    route => route.status === "healthy"
+  ).length;
+
+  const avgLatency =
+    routes.length === 0
+      ? 0
+      : (
+          routes.reduce(
+            (sum, route) => sum + route.avg_latency,
+            0
+          ) / routes.length
+        ).toFixed(2);
+
+  const metrics = [
   {
     label: 'Total Routes',
-    value: '4',
+    value: totalRoutes,
     icon: (
       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
@@ -9,8 +34,8 @@ const metrics = [
     ),
   },
   {
-    label: 'Requests Today',
-    value: '24.8K',
+    label: 'Requests',
+    value: totalRequests,
     icon: (
       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M3 7.5L7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5" />
@@ -18,8 +43,8 @@ const metrics = [
     ),
   },
   {
-    label: 'Healthy Backends',
-    value: '7/8',
+    label: 'Healthy Routes',
+    value: `${healthyRoutes}/${totalRoutes}`,
     icon: (
       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -29,7 +54,7 @@ const metrics = [
   },
   {
     label: 'Avg Latency',
-    value: '42ms',
+    value: `${avgLatency}ms`,
     icon: (
       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -37,8 +62,6 @@ const metrics = [
     ),
   },
 ];
-
-export default function RoutesMetricsStrip() {
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
       {metrics.map((metric) => (

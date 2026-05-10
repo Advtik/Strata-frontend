@@ -1,74 +1,45 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const routesData = [
-  {
-    id: 1,
-    name: 'auth-api',
-    prefix: '/auth',
-    backends: 2,
-    requests: '8.2K',
-    lastActive: '2 min ago',
-    status: 'Healthy',
-  },
-  {
-    id: 2,
-    name: 'payments',
-    prefix: '/payments',
-    backends: 3,
-    requests: '12.4K',
-    lastActive: '< 1 min ago',
-    status: 'Healthy',
-  },
-  {
-    id: 3,
-    name: 'notifications',
-    prefix: '/notify',
-    backends: 2,
-    requests: '3.1K',
-    lastActive: '5 min ago',
-    status: 'Degraded',
-  },
-  {
-    id: 4,
-    name: 'analytics',
-    prefix: '/analytics',
-    backends: 1,
-    requests: '1.1K',
-    lastActive: '12 min ago',
-    status: 'Healthy',
-  },
-];
+
 
 const StatusBadge = ({ status }) => {
   const styles = {
-    Healthy: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
-    Degraded: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
-    Offline: 'bg-red-500/10 text-red-400 border-red-500/20',
+    healthy: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
+    degraded: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
+    offline: 'bg-red-500/10 text-red-400 border-red-500/20',
   };
 
   const dotStyles = {
-    Healthy: 'bg-emerald-400',
-    Degraded: 'bg-amber-400',
-    Offline: 'bg-red-400',
+    healthy: 'bg-emerald-400',
+    hegraded: 'bg-amber-400',
+    offline: 'bg-red-400',
   };
 
   return (
     <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border ${styles[status]}`}>
       <span className={`w-1.5 h-1.5 rounded-full ${dotStyles[status]}`} />
-      {status}
+      {status.charAt(0).toUpperCase() + status.slice(1)}
     </span>
   );
 };
 
-export default function RoutesTable({ onRouteClick }) {
+export default function RoutesTable({ routes,loading, onRouteClick }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [hoveredRow, setHoveredRow] = useState(null);
   const navigate = useNavigate();
 
-  const filteredRoutes = routesData.filter(route =>
+  if (loading) {
+    return (
+      <div className="rounded-xl border border-white/5 bg-white/[0.02] p-10 flex items-center justify-center">
+        <div className="w-8 h-8 border-2 border-teal-500 border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  const filteredRoutes = routes.filter(route =>
     route.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    route.prefix.toLowerCase().includes(searchQuery.toLowerCase())
+    route.path.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -95,14 +66,23 @@ export default function RoutesTable({ onRouteClick }) {
 
       {/* Table */}
       <div className="overflow-x-auto">
-        <table className="w-full">
+        <table className="w-full table-fixed">
+          <colgroup>
+            <col className="w-[18%]" />  {/* Project */}
+            <col className="w-[18%]" />  {/* Routes */}
+            <col className="w-[13%]" />  {/* Requests */}
+            <col className="w-[13%]" />  {/* Backends */}
+            <col className="w-[16%]" />  {/* Created */}
+            <col className="w-[13%]" />  {/* Status */}
+            <col className="w-[7%]"  />  {/* Actions */}
+          </colgroup>
           <thead>
             <tr className="border-b border-white/5">
               <th className="text-left px-5 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider">Route Name</th>
               <th className="text-left px-5 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider">Path Prefix</th>
               <th className="text-left px-5 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider">Backends</th>
               <th className="text-left px-5 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider">Requests</th>
-              <th className="text-left px-5 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider">Last Active</th>
+              <th className="text-left px-5 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider">Created</th>
               <th className="text-left px-5 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider">Status</th>
               <th className="w-12"></th>
             </tr>
@@ -113,7 +93,7 @@ export default function RoutesTable({ onRouteClick }) {
                 key={route.id}
                 onClick={() => {
                   onRouteClick && onRouteClick(route);
-                  navigate(`/routes/${route.name}`);
+                  navigate(`/routes/${route.id}`);
                 }}
                 onMouseEnter={() => setHoveredRow(route.id)}
                 onMouseLeave={() => setHoveredRow(null)}
@@ -133,7 +113,7 @@ export default function RoutesTable({ onRouteClick }) {
                   </div>
                 </td>
                 <td className="px-5 py-4">
-                  <code className="px-2 py-1 rounded bg-white/5 text-xs text-zinc-300 font-mono">{route.prefix}</code>
+                  <code className="px-2 py-1 rounded bg-white/5 text-xs text-zinc-300 font-mono">{route.path}</code>
                 </td>
                 <td className="px-5 py-4">
                   <div className="flex items-center gap-1.5">
@@ -147,7 +127,9 @@ export default function RoutesTable({ onRouteClick }) {
                   <span className="text-sm text-zinc-300">{route.requests}</span>
                 </td>
                 <td className="px-5 py-4">
-                  <span className="text-sm text-zinc-500">{route.lastActive}</span>
+                  <span className="text-sm text-zinc-500">{route.created_at
+                      ? new Date(route.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+                      : '—'}</span>
                 </td>
                 <td className="px-5 py-4">
                   <StatusBadge status={route.status} />

@@ -3,14 +3,32 @@ import Landing from './pages/Landing'
 import Projects from './pages/Projects'
 import RoutePage from './pages/RoutePage'
 import RouteDetail from './pages/RouteDetail'
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Landing />} />
-      <Route path="/projects" element={<Projects />} />
-      <Route path="/projects/:projectId/routes" element={<RoutePage />} />
-      <Route path="/routes/:routeName" element={<RouteDetail />} />
+      <Route
+        path="/projects"
+        element={
+          <ProtectedRoute>
+            <Projects />
+          </ProtectedRoute>
+        }
+      />
+      <Route path="/projects/:projectId/routes" element={
+        <ProtectedRoute>
+            <RoutePage />
+        </ProtectedRoute>
+        } 
+      />
+      <Route path="/routes/:routeId" element={
+        <ProtectedRoute>
+          <RouteDetail />
+        </ProtectedRoute>
+        } 
+      />
     </Routes>
   )
 }

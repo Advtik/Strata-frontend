@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Sidebar from '../route/Sidebar'
 import TopBar from '../project-workspace/TopBar'
@@ -7,26 +7,52 @@ import RoutesMetricsStrip from './RoutesMetricsStrip'
 import RoutesTable from './RoutesTable'
 import EmptyRoutes from './EmptyRoutes'
 import { ApiKeysPage } from '../apikeys'
+import apiClient from '../../api/client'
 
-// Project data mapping
-const projectsData = {
-  1: { name: 'Strata', description: 'API Gateway Infrastructure' },
-  2: { name: 'Enmate', description: 'User Service Platform' },
-  3: { name: 'Taskflow', description: 'Task Management System' },
-  4: { name: 'VakiAI', description: 'ML Platform Services' },
-}
+
 
 export default function RoutesWorkspace({ projectId, showEmpty = false }) {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [activeTab, setActiveTab] = useState('routes')
+  const [project, setProject] = useState(null)
+  const [routes, setRoutes] = useState([])
+  const [loadingRoutes, setLoadingRoutes] = useState(true)
   const navigate = useNavigate()
   
-  // Get project data from projectId
-  const project = projectsData[projectId] || { name: 'Project', description: 'Project Details' }
+  useEffect(() => {
 
-  const handleNewRoute = () => {
-    console.log('Create new route')
-  }
+    const fetchRoutes = async () => {
+
+      try {
+
+        const routesRes = await apiClient.get(`api/routes/${projectId}`)
+
+        setRoutes(routesRes.data)
+
+        const projectsRes = await apiClient.get("api/projects")
+
+        const currentProject = projectsRes.data.find(
+          p => p.id === Number(projectId)
+        )
+
+        setProject(currentProject)
+
+      } catch (error) {
+
+        console.error("Failed to fetch routes:", error)
+
+      } finally {
+
+        setLoadingRoutes(false)
+
+      }
+
+    }
+
+    fetchRoutes()
+
+  }, [projectId])
+
 
   const handleRouteClick = (route) => {
     console.log('Route clicked:', route)
@@ -38,6 +64,44 @@ export default function RoutesWorkspace({ projectId, showEmpty = false }) {
 
   const handleBackToProjects = () => {
     navigate('/projects')
+  }
+
+  const handleNewRoute = async (data) => {
+  
+    try {
+  
+      // STEP 1 → create route
+      const routeRes = await apiClient.post(
+        `api/routes/${projectId}`,
+        {
+          name: data.name
+        }
+      )
+  
+      const routeId = routeRes.data.id
+  
+      // STEP 2 → attach route rate limit
+      await apiClient.post(
+        `api/rate-limit/route/${routeId}`,
+        {
+          refill_rate: data.refillRate,
+          capacity: data.capacity
+        }
+      )
+  
+      // STEP 3 → refresh routes
+      const updatedRoutes = await apiClient.get(
+        `api/routes/${projectId}`
+      )
+  
+      setRoutes(updatedRoutes.data)
+  
+    } catch (error) {
+  
+      console.error("Failed to create route:", error)
+  
+    }
+  
   }
 
   return (
@@ -59,19 +123,23 @@ export default function RoutesWorkspace({ projectId, showEmpty = false }) {
         <div className="p-8 max-w-7xl">
           {activeTab === 'routes' && (
             <>
-              <ProjectHeader 
-                projectName={project.name}
-                description={project.description}
-                onNewRoute={handleNewRoute}
-                onBack={handleBackToProjects}
+              <ProjectHeader
+                projectName={project?.name || 'Loading...'}
+                description={project?.description || 'Add Routes to your Project'}
+                onBack={() => navigate('/projects')}
+                onCreateRoute={handleNewRoute}
               />
               
-              <RoutesMetricsStrip />
+              <RoutesMetricsStrip routes={routes} />
               
               {showEmpty ? (
                 <EmptyRoutes onCreateRoute={handleNewRoute} />
               ) : (
-                <RoutesTable onRouteClick={handleRouteClick} />
+                <RoutesTable
+                  routes={routes}
+                  loading={loadingRoutes}
+                  onRouteClick={handleRouteClick}
+                />
               )}
             </>
           )}

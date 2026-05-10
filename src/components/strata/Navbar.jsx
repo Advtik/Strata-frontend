@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import apiClient from '../../api/client';
 
 const GitHubIcon = () => (
   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -20,6 +21,22 @@ const CloseIcon = () => (
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const handleGithubLogin = async () => {
+
+    try {
+
+      const response = await apiClient.get("/auth/github/login");
+
+      window.location.href = response.data.url;
+
+    } catch (error) {
+
+      console.error("GitHub login failed:", error);
+
+    }
+
+  };
 
   const navLinks = [
     { name: 'Features', href: '#features' },
@@ -56,13 +73,13 @@ export default function Navbar() {
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
             <a
-              href="#"
+              onClick={handleGithubLogin}
               className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
             >
               Sign in
             </a>
             <a
-              href="#"
+              onClick={handleGithubLogin}
               className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium bg-foreground text-background rounded-lg hover:bg-foreground/90 transition-all duration-200"
             >
               <GitHubIcon />
@@ -94,11 +111,11 @@ export default function Navbar() {
                 </a>
               ))}
               <div className="pt-4 border-t border-border flex flex-col gap-3">
-                <a href="#" className="text-sm text-muted-foreground hover:text-foreground">
+                <a onClick={handleGithubLogin} className="text-sm text-muted-foreground hover:text-foreground">
                   Sign in
                 </a>
                 <a
-                  href="#"
+                  onClick={handleGithubLogin}
                   className="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium bg-foreground text-background rounded-lg"
                 >
                   <GitHubIcon />
