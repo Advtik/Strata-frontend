@@ -1,12 +1,13 @@
 import { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function TopBar({ collapsed }) {
   const [searchFocused, setSearchFocused] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { user, logout } = useAuth();
   const dropdownRef = useRef(null);
-
+  const navigate=useNavigate();
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -28,7 +29,7 @@ export default function TopBar({ collapsed }) {
     >
       {/* Left: Workspace Switcher */}
       <div className="flex items-center gap-3">
-        <button className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
+        <button className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 transition-colors" onClick={() => navigate(`/projects`)}>
           <div className="w-5 h-5 rounded bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center">
             <span className="text-[10px] font-bold text-white">A</span>
           </div>

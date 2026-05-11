@@ -24,7 +24,7 @@ const StatusBadge = ({ status }) => {
   );
 };
 
-export default function RoutesTable({ routes,loading, onRouteClick }) {
+export default function RoutesTable({ routes,loading, onRouteClick, onDeleteRoute}) {
   const [searchQuery, setSearchQuery] = useState('');
   const [hoveredRow, setHoveredRow] = useState(null);
   const navigate = useNavigate();
@@ -135,15 +135,45 @@ export default function RoutesTable({ routes,loading, onRouteClick }) {
                   <StatusBadge status={route.status} />
                 </td>
                 <td className="px-5 py-4">
-                  <button 
-                    className={`p-1.5 rounded-lg text-zinc-500 hover:text-white hover:bg-white/10 transition-all ${hoveredRow === route.id ? 'opacity-100' : 'opacity-0'}`}
-                    onClick={(e) => {
-                      e.stopPropagation();
+                  <button
+                    className={`
+                      p-1.5 rounded-lg text-zinc-500
+                      hover:text-red-400
+                      hover:bg-red-500/10
+                      transition-all
+                      ${hoveredRow === route.id
+                        ? 'opacity-100'
+                        : 'opacity-0'}
+                    `}
+                    onClick={async (e) => {
+
+                      e.stopPropagation()
+
+                      const confirmed = window.confirm(
+                        `Delete route "${route.name}"?`
+                      )
+
+                      if(!confirmed){
+                        return
+                      }
+
+                      await onDeleteRoute(route.id)
+
                     }}
                   >
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                    </svg>
+                    <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                        />
+                      </svg>
                   </button>
                 </td>
               </tr>

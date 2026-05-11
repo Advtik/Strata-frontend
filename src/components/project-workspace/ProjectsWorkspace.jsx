@@ -7,7 +7,7 @@ import ProjectsTable from './ProjectsTable';
 import NewProjectModal from './NewProjectModal'; // ← ADD THIS IMPORT
 import { useAuth } from '../../context/AuthContext';
 import apiClient from '../../api/client';
-
+import { useSearchParams } from 'react-router-dom';
 
 export default function ProjectsWorkspace() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -15,6 +15,17 @@ export default function ProjectsWorkspace() {
   const [projects, setProjects] = useState([]);
   const [loadingProjects, setLoadingProjects] = useState(true);
   const [error, setError] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams()
+  const activeTab = searchParams.get('tab') || 'projects'
+  const [metrics,setMetrics] = useState(null)
+
+  const setActiveTab = (tab) => {
+    if (tab === 'projects') {
+      setSearchParams({})
+    } else {
+      setSearchParams({ tab })
+    }
+  }
 
   // ↓ ADD THIS HANDLER
   const handleCreateProject = async ({ name }) => {
@@ -62,6 +73,10 @@ export default function ProjectsWorkspace() {
 
         setProjects(Array.isArray(res.data) ? res.data : res.data.projects || []);
 
+        const metricsRes = await apiClient.get("/metrics/projects")
+
+        setMetrics(metricsRes.data)
+
       } catch (error) {
 
         console.error("Failed to fetch projects:", error.response?.status, error.message);
@@ -81,6 +96,29 @@ export default function ProjectsWorkspace() {
     fetchProjects();
 
   }, []);
+
+  const handleDeleteProject = async (projectId) => {
+
+    try {
+
+      await apiClient.delete(
+        `/api/projects/${projectId}`
+      )
+
+      setProjects(prev =>
+        prev.filter(projects => projects.id !== projectId)
+      )
+
+    } catch (error) {
+
+      console.error(
+        "Failed to delete route:",
+        error
+      )
+
+    }
+
+  }
 
   return (
     <div className="min-h-screen bg-[#050505]">
@@ -111,10 +149,11 @@ export default function ProjectsWorkspace() {
             </div>
           )}
 
-          <MetricsRow />
+          <MetricsRow metrics={metrics}/>
           <ProjectsTable
             projects={projects}
             loading={loadingProjects}
+            onDeleteProject={handleDeleteProject}
           />
         </div>
       </main>

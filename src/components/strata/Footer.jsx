@@ -42,13 +42,13 @@ export default function Footer() {
             
             {/* Social Links */}
             <div className="flex items-center gap-4 mt-6">
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors duration-200">
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors duration-200 cursor-pointer">
                 <GitHubIcon />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors duration-200">
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors duration-200 cursor-pointer">
                 <TwitterIcon />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors duration-200">
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors duration-200 cursor-pointer">
                 <DiscordIcon />
               </a>
             </div>
@@ -63,7 +63,7 @@ export default function Footer() {
                   <li key={link}>
                     <a
                       href="#"
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 cursor-pointer"
                     >
                       {link}
                     </a>

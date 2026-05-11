@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import Sidebar from '../route/Sidebar'
 import TopBar from '../project-workspace/TopBar'
 import ProjectHeader from './ProjectHeader'
@@ -104,6 +104,29 @@ export default function RoutesWorkspace({ projectId, showEmpty = false }) {
   
   }
 
+  const handleDeleteRoute = async (routeId) => {
+
+    try {
+
+      await apiClient.delete(
+        `/api/routes/${routeId}`
+      )
+
+      setRoutes(prev =>
+        prev.filter(route => route.id !== routeId)
+      )
+
+    } catch (error) {
+
+      console.error(
+        "Failed to delete route:",
+        error
+      )
+
+    }
+
+  }
+
   return (
     <div className="min-h-screen bg-[#050505]">
       <Sidebar 
@@ -139,6 +162,7 @@ export default function RoutesWorkspace({ projectId, showEmpty = false }) {
                   routes={routes}
                   loading={loadingRoutes}
                   onRouteClick={handleRouteClick}
+                  onDeleteRoute={handleDeleteRoute}
                 />
               )}
             </>

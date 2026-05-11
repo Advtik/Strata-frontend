@@ -38,6 +38,28 @@ export default function Navbar() {
 
   };
 
+  const Logo = () => (
+    <svg viewBox="0 0 32 32" fill="none" className="w-8 h-8">
+      <rect width="32" height="32" rx="8" fill="url(#logo-gradient)" />
+      <path
+        d="M8 16L14 10L20 16L14 22L8 16Z"
+        fill="white"
+        fillOpacity="0.9"
+      />
+      <path
+        d="M14 16L20 10L26 16L20 22L14 16Z"
+        fill="white"
+        fillOpacity="0.6"
+      />
+      <defs>
+        <linearGradient id="logo-gradient" x1="0" y1="0" x2="32" y2="32">
+          <stop stopColor="#14b8a6" />
+          <stop offset="1" stopColor="#0d9488" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+
   const navLinks = [
     { name: 'Features', href: '#features' },
     { name: 'Architecture', href: '#architecture' },
@@ -51,9 +73,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-accent/20 flex items-center justify-center">
-              <div className="w-4 h-4 rounded-sm bg-accent" />
-            </div>
+            <Logo></Logo>
             <span className="text-xl font-semibold tracking-tight">Strata</span>
           </div>
 
@@ -74,13 +94,13 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-4">
             <a
               onClick={handleGithubLogin}
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 cursor-pointer"
             >
               Sign in
             </a>
             <a
               onClick={handleGithubLogin}
-              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium bg-foreground text-background rounded-lg hover:bg-foreground/90 transition-all duration-200"
+              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium bg-foreground text-background rounded-lg hover:bg-foreground/90 transition-all duration-200 cursor-pointer"
             >
               <GitHubIcon />
               <span>Login with GitHub</span>
@@ -111,12 +131,12 @@ export default function Navbar() {
                 </a>
               ))}
               <div className="pt-4 border-t border-border flex flex-col gap-3">
-                <a onClick={handleGithubLogin} className="text-sm text-muted-foreground hover:text-foreground">
+                <a onClick={handleGithubLogin} className="text-sm text-muted-foreground hover:text-foreground cursor-pointer">
                   Sign in
                 </a>
                 <a
                   onClick={handleGithubLogin}
-                  className="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium bg-foreground text-background rounded-lg"
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium bg-foreground text-background rounded-lg cursor-pointer"
                 >
                   <GitHubIcon />
                   <span>Login with GitHub</span>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, useSearchParams } from 'react-router-dom'
 
 import RouteDetailSidebar from '../components/route/RouteDetailSidebar'
 import TopBar from '../components/project-workspace/TopBar'
@@ -20,7 +20,16 @@ export default function RouteDetail() {
 
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
 
-  const [activeTab, setActiveTab] = useState('backends')
+  const [searchParams, setSearchParams] = useSearchParams()
+  const activeTab = searchParams.get('tab') || 'backends'
+  const setActiveTab = (tab) => {
+    if (tab === 'backends') {
+      setSearchParams({})  // default tab — clean URL, no ?tab=
+    } else {
+      setSearchParams({ tab })  // non-default — write to URL
+    }
+  }
+  
 
   const [selectedBackend, setSelectedBackend] = useState(null)
 
@@ -254,6 +263,7 @@ const handleUpdateCapacity = async (value) => {
                 backendMetrics={{
                   backends: route.backends || []
                 }}
+                refillRate={route.refill_rate || 0}
               />
 
             </>

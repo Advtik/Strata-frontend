@@ -29,7 +29,7 @@ const gradients = [
   'from-emerald-500 to-green-500',
 ];
 
-export default function ProjectsTable({ projects, loading }) {
+export default function ProjectsTable({ projects, loading, onDeleteProject }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [hoveredRow, setHoveredRow] = useState(null);
   const navigate = useNavigate();
@@ -159,15 +159,45 @@ export default function ProjectsTable({ projects, loading }) {
                 {/* Actions */}
                 <td className="px-5 py-4 text-right">
                   <button
-                    className={`p-1.5 rounded-md text-zinc-500 hover:text-white hover:bg-white/10 transition-all ${
-                      hoveredRow === project.id ? 'opacity-100' : 'opacity-0'
-                    }`}
-                    onClick={(e) => e.stopPropagation()}
+                  className={`
+                    p-1.5 rounded-lg text-zinc-500
+                    hover:text-red-400
+                    hover:bg-red-500/10
+                    transition-all
+                    ${hoveredRow === project.id
+                      ? 'opacity-100'
+                      : 'opacity-0'}
+                  `}
+                  onClick={async (e) => {
+
+                    e.stopPropagation()
+
+                    const confirmed = window.confirm(
+                      `Delete project "${project.name}"?`
+                    )
+
+                    if(!confirmed){
+                      return
+                    }
+
+                    await onDeleteProject(project.id)
+
+                  }}
+                >
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
                   >
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-                    </svg>
-                  </button>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                    />
+                  </svg>
+                </button>
                 </td>
 
               </tr>

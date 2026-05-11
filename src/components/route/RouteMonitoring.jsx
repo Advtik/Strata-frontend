@@ -12,6 +12,7 @@ import {
 } from 'recharts'
 
 import BackendMonitoringPanel from './BackendMonitoringPanel'
+import LoadBalancerGraph from './LoadBalancerGraph'
 
 // Format unix timestamp to readable time
 const formatTime = (timestamp) => {
@@ -69,7 +70,8 @@ const CustomTooltip = ({
 
 export default function RouteMonitoring({
   monitoringData,
-  backendMetrics
+  backendMetrics,
+  refillRate
 }) {
 
   const [expandedBackend, setExpandedBackend] =
@@ -99,10 +101,7 @@ export default function RouteMonitoring({
       monitoringData?.avg_latency*1000 || 0
     )
 
-  const rateLimit =
-    Number(
-      monitoringData?.rate_limit_threshold || 0
-    )
+  const rateLimit = refillRate*60 || Number(monitoringData?.rate_limit_threshold || 0)
 
   const backends =
     backendMetrics?.backends || []
@@ -343,6 +342,9 @@ export default function RouteMonitoring({
         ))}
 
       </div>
+
+      {/* Load Balancer Distribution */}
+      <LoadBalancerGraph backendMetrics={backendMetrics} />
 
       {/* Backend Monitoring */}
       <div className="space-y-4">
