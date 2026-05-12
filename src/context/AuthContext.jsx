@@ -4,63 +4,30 @@ import apiClient from "../api/client";
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-
   const [user, setUser] = useState(null);
-  console.log("AUTH CONTEXT RENDER");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-
     const checkAuth = async () => {
-      console.log("CHECK AUTH START");
-
       try {
-
         const res = await apiClient.get("/auth/me");
-        console.log("AUTH RESPONSE:", res.data);
-
-        if (res.data.error) {
-
-          setUser(null);
-
-        } else {
-
-          setUser(res.data);
-
-        }
-
-      } catch (error) {
-
+        setUser(res.data.error ? null : res.data);
+      } catch {
         setUser(null);
-
       } finally {
-
         setLoading(false);
-        console.log("SETTING LOADING FALSE");
-
       }
-      
-
     };
-    checkAuth()
-
+    checkAuth();
   }, []);
 
   const logout = () => {
-
     setUser(null);
-
+    // optionally hit a /auth/logout endpoint to clear the cookie server-side
   };
 
   return (
-    <AuthContext.Provider
-      value={{
-        user,
-        setUser,
-        loading,
-        logout,
-      }}
-    >
+    <AuthContext.Provider value={{ user, setUser, loading, logout }}>
       {children}
     </AuthContext.Provider>
   );
