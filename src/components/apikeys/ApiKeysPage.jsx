@@ -97,6 +97,11 @@ export default function ApiKeysPage() {
         error
       );
 
+      alert(
+        error.response?.data?.detail ||
+        "Something went wrong"
+      );
+
     }
 
   };
