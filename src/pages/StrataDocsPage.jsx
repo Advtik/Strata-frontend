@@ -339,7 +339,7 @@ function ArchitectureDiagram() {
             <Globe className="w-7 h-7 text-zinc-400" />
           </div>
           <span className="text-xs font-medium text-zinc-300">Client</span>
-          <code className="text-[10px] text-zinc-600 bg-white/5 px-2 py-0.5 rounded">x-api-key: sk_live_…</code>
+          <code className="text-[10px] text-zinc-600 bg-white/5 px-2 py-0.5 rounded">x-api-key: api_key_…</code>
         </div>
 
         {/* Arrow */}
@@ -972,7 +972,7 @@ export default function StrataDocsPage() {
                   The full key value is displayed exactly once after generation. Strata stores only a hash. Copy it before closing the modal.
                 </Callout>
                 <p className="text-sm text-zinc-400 leading-relaxed">Pass the key in every proxied request using the <code className="text-blue-300 font-mono text-xs bg-white/5 px-1.5 py-0.5 rounded">x-api-key</code> header:</p>
-                <CodeBlock language="http" code={`GET /proxy/payments/users HTTP/1.1\nHost: strata-proxy.onrender.com\nx-api-key: sk_live_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`} />
+                <CodeBlock language="http" code={`GET /proxy/payments/users HTTP/1.1\nHost: strata-proxy.onrender.com\nx-api-key: "your-api-key"`} />
               </div>
             </div>
 
