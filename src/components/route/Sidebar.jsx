@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 const Logo = () => (
-  <svg viewBox="0 0 32 32" fill="none" className="w-8 h-8">
+  <svg viewBox="0 0 32 32" fill="none" className="w-9 h-9">
     <rect width="32" height="32" rx="8" fill="url(#logo-gradient)" />
     <path
       d="M8 16L14 10L20 16L14 22L8 16Z"
@@ -82,7 +82,7 @@ export default function Sidebar({ collapsed, onToggle, activeTab = 'routes', onT
       `}
     >
       {/* Logo */}
-      <div className={`flex items-center gap-3 p-4 border-b border-white/5 ${collapsed ? 'justify-center' : ''}`}>
+      <div className={`flex items-center gap-2 p-4 border-b border-white/5 ${collapsed ? 'justify-center' : ''}`}>
         <Logo />
         {!collapsed && <div className="flex flex-col">
               <span className="text-xl font-semibold tracking-tight text-white leading-none">
@@ -131,7 +131,7 @@ export default function Sidebar({ collapsed, onToggle, activeTab = 'routes', onT
               `}
             >
               {item.icon}
-              {!collapsed && <span>Start with Documentation</span>}
+              {!collapsed && <span>Documentation</span>}
             </a>
           ) : (
           <button
