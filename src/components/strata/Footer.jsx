@@ -1,71 +1,232 @@
 const GitHubIcon = () => (
   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-    <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+    <path
+      fillRule="evenodd"
+      d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+      clipRule="evenodd"
+    />
   </svg>
 );
+const Logo = () => (
+    <svg viewBox="0 0 32 32" fill="none" className="w-9 h-9">
+      <rect
+        width="32"
+        height="32"
+        rx="8"
+        fill="url(#logo-gradient)"
+      />
 
-const TwitterIcon = () => (
-  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-  </svg>
-);
+      <path
+        d="M8 16L14 10L20 16L14 22L8 16Z"
+        fill="white"
+        fillOpacity="0.9"
+      />
 
-const DiscordIcon = () => (
-  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-    <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z" />
-  </svg>
-);
+      <path
+        d="M14 16L20 10L26 16L20 22L14 16Z"
+        fill="white"
+        fillOpacity="0.6"
+      />
+
+      <defs>
+        <linearGradient
+          id="logo-gradient"
+          x1="0"
+          y1="0"
+          x2="32"
+          y2="32"
+        >
+          <stop stopColor="#14b8a6" />
+          <stop offset="1" stopColor="#0d9488" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
 
 export default function Footer() {
+
   const footerLinks = {
-    Product: ['Features', 'Pricing', 'Documentation', 'Changelog'],
-    Company: ['About', 'Blog', 'Careers', 'Contact'],
-    Legal: ['Privacy', 'Terms', 'Security'],
-    Developers: ['API Reference', 'SDKs', 'Status', 'Support'],
+
+    Platform: [
+      {
+        label: "Documentation",
+        href: "/docs"
+      },
+
+      {
+        label: "Gateway Architecture",
+        href: "#architecture"
+      },
+
+      {
+        label: "Features",
+        href: "#features"
+      },
+
+      {
+        label: "Monitoring",
+        href: "#metrics"
+      },
+    ],
+
+    Resources: [
+      {
+        label: "Frontend Repository",
+        href: "https://github.com/Advtik/Strata-frontend",
+      },
+
+      {
+        label: "Backend Repository",
+        href: "https://github.com/Advtik/Strata",
+      },
+
+      {
+        label: "Proxy Endpoint",
+        href: "https://strata-proxy.onrender.com",
+      },
+    ],
+
+    Developers: [
+      {
+        label: "API Keys",
+        href: "/docs"
+      },
+
+      {
+        label: "Routes & Backends",
+        href: "/docs"
+      },
+
+      {
+        label: "Rate Limiting",
+        href: "/docs"
+      },
+
+      {
+        label: "Request Flow",
+        href: "/docs"
+      },
+    ],
   };
 
   return (
     <footer className="relative border-t border-border bg-card/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-8">
-          {/* Brand */}
-          <div className="col-span-2">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-accent/20 flex items-center justify-center">
-                <div className="w-4 h-4 rounded-sm bg-accent" />
-              </div>
-              <span className="text-xl font-semibold tracking-tight">Strata</span>
-            </div>
-            <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
-              The modern infrastructure layer for your APIs. Route, balance, limit, and monitor with precision.
-            </p>
-            
-            {/* Social Links */}
-            <div className="flex items-center gap-4 mt-6">
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors duration-200 cursor-pointer">
-                <GitHubIcon />
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors duration-200 cursor-pointer">
-                <TwitterIcon />
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors duration-200 cursor-pointer">
-                <DiscordIcon />
-              </a>
-            </div>
-          </div>
 
-          {/* Links */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-12">
+
+          {/* Brand */}
+          <div className="md:col-span-2">
+
+            {/* Logo */}
+            <div className="flex items-center gap-2 mb-4">
+
+              {/* Brand */}
+              <div className="flex items-center gap-2">
+
+                <Logo />
+
+                <div className="flex flex-col">
+
+                  <span className="text-xl font-semibold tracking-tight text-white leading-none">
+                    Strata
+                  </span>
+
+                  <span className="text-[10px] tracking-[0.05em] text-white-500 leading-none mt-[1px] px-2">
+                    by Advtik
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Description */}
+            <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
+              Reverse proxy and API gateway infrastructure for routing,
+              monitoring, authenticating, and managing backend traffic through
+              a centralized proxy layer.
+            </p>
+
+
+            {/* Builder Section */}
+            <div className="mt-8 max-w-[390px]">
+
+              <div className="relative overflow-hidden rounded-2xl  bg-transparent px-4 py-4">
+
+                {/* Accent */}
+                <div className="absolute left-0 top-0 h-full w-[3px] bg-gradient-to-b from-teal-400 to-emerald-500" />
+
+                  <div className="flex items-start justify-between gap-4">
+
+                    {/* Left */}
+                    <div className="min-w-0">
+
+                      <p className="text-m font-semibold text-zinc-100">
+                        Built by Advtik
+                      </p>
+
+                      <p className="text-xs leading-relaxed text-zinc-500 mt-1">
+                        with knowledge,engineering,prompts and patience.
+                      </p>
+                    </div>
+
+                    {/* Socials */}
+                    <div className="flex items-center gap-2 shrink-0">
+
+                      <a
+                        href="https://github.com/Advtik"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-9 h-9 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-zinc-500 hover:text-white hover:border-white/20 transition-all duration-200"
+                      >
+                        <GitHubIcon />
+                      </a>
+
+                      <a
+                        href="https://x.com/adwiteekk"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-9 h-9 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-zinc-500 hover:text-white hover:border-white/20 transition-all duration-200 text-xs font-semibold"
+                      >
+                        X
+                      </a>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          {/* Footer Links */}
           {Object.entries(footerLinks).map(([category, links]) => (
+
             <div key={category}>
-              <h3 className="text-sm font-semibold mb-4">{category}</h3>
+
+              <h3 className="text-sm font-semibold mb-4">
+                {category}
+              </h3>
+
               <ul className="space-y-3">
+
                 {links.map((link) => (
-                  <li key={link}>
+
+                  <li key={link.label}>
+
                     <a
-                      href="#"
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 cursor-pointer"
+                      href={link.href}
+                      target={
+                        link.href.startsWith("http")
+                          ? "_blank"
+                          : undefined
+                      }
+                      rel={
+                        link.href.startsWith("http")
+                          ? "noopener noreferrer"
+                          : undefined
+                      }
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
                     >
-                      {link}
+                      {link.label}
                     </a>
                   </li>
                 ))}
@@ -76,12 +237,18 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
+
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Strata. All rights reserved.
+            © {new Date().getFullYear()} Strata by Advtik
           </p>
-          <div className="flex items-center gap-1 text-xs text-muted-foreground">
+
+          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+
             <span className="w-2 h-2 rounded-full bg-green-500" />
-            <span>All systems operational</span>
+
+            <span>
+              Proxy online
+            </span>
           </div>
         </div>
       </div>

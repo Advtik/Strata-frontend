@@ -4,6 +4,7 @@ import Projects from './pages/Projects'
 import RoutePage from './pages/RoutePage'
 import RouteDetail from './pages/RouteDetail'
 import ProtectedRoute from "./components/ProtectedRoute";
+import StrataDocsPage from "./pages/StrataDocsPage"
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         </ProtectedRoute>
         } 
       />
+      <Route path="/docs" element={<StrataDocsPage />} />
     </Routes>
   )
 }

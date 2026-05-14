@@ -84,8 +84,16 @@ export default function Sidebar({ collapsed, onToggle, activeTab = 'routes', onT
       {/* Logo */}
       <div className={`flex items-center gap-3 p-4 border-b border-white/5 ${collapsed ? 'justify-center' : ''}`}>
         <Logo />
-        {!collapsed && <span className="text-white font-semibold text-lg tracking-tight">Strata</span>}
-      </div>
+        {!collapsed && <div className="flex flex-col">
+              <span className="text-xl font-semibold tracking-tight text-white leading-none">
+                Strata
+              </span>
+
+              <span className="text-[10px] tracking-[0.05em] text-white-500 leading-none mt-[1px] px-2">
+                by Advtik
+              </span>
+            </div>}
+        </div>
 
       {/* Navigation */}
       <nav className="flex-1 p-3 space-y-1">
@@ -112,6 +120,20 @@ export default function Sidebar({ collapsed, onToggle, activeTab = 'routes', onT
       {/* Bottom Section */}
       <div className="p-3 border-t border-white/5 space-y-1">
         {bottomItems.map((item) => (
+          item.label === "Documentation" ? (
+            <a
+              href="/docs"
+              key={item.label}
+              className={`
+                w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium
+                text-zinc-400 hover:text-white hover:bg-white/5 transition-all duration-150
+                ${collapsed ? 'justify-center' : ''}
+              `}
+            >
+              {item.icon}
+              {!collapsed && <span>Start with Documentation</span>}
+            </a>
+          ) : (
           <button
             key={item.label}
             className={`
@@ -123,6 +145,7 @@ export default function Sidebar({ collapsed, onToggle, activeTab = 'routes', onT
             {item.icon}
             {!collapsed && <span>{item.label}</span>}
           </button>
+          )
         ))}
         
         {/* Collapse Button */}
