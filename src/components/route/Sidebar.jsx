@@ -118,9 +118,13 @@ export default function Sidebar({ collapsed, onToggle, activeTab = 'routes', onT
       </nav>
 
       {/* Bottom Section */}
+      {/* Bottom Section */}
       <div className="p-3 border-t border-white/5 space-y-1">
+
         {bottomItems.map((item) => (
+
           item.label === "Documentation" ? (
+
             <a
               href="/docs"
               key={item.label}
@@ -131,42 +135,86 @@ export default function Sidebar({ collapsed, onToggle, activeTab = 'routes', onT
               `}
             >
               {item.icon}
-              {!collapsed && <span>Documentation</span>}
+
+              {!collapsed && (
+                <span>
+                  Documentation
+                </span>
+              )}
             </a>
+
+          ) : item.label === "Feedback" ? (
+
+            <a
+              href="https://x.com/adwiteekk"
+              target="_blank"
+              rel="noopener noreferrer"
+              key={item.label}
+              className={`
+                w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium
+                text-zinc-400 hover:text-white hover:bg-white/5 transition-all duration-150
+                ${collapsed ? 'justify-center' : ''}
+              `}
+            >
+              {item.icon}
+
+              {!collapsed && (
+                <span>
+                  Send Feedback
+                </span>
+              )}
+            </a>
+
           ) : (
-          <button
-            key={item.label}
-            className={`
-              w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium
-              text-zinc-400 hover:text-white hover:bg-white/5 transition-all duration-150
-              ${collapsed ? 'justify-center' : ''}
-            `}
-          >
-            {item.icon}
-            {!collapsed && <span>{item.label}</span>}
-          </button>
+
+            <button
+              key={item.label}
+              className={`
+                w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium
+                text-zinc-400 hover:text-white hover:bg-white/5 transition-all duration-150
+                ${collapsed ? 'justify-center' : ''}
+              `}
+            >
+              {item.icon}
+
+              {!collapsed && (
+                <span>
+                  {item.label}
+                </span>
+              )}
+            </button>
+
           )
         ))}
-        
+
         {/* Collapse Button */}
         <button
           onClick={onToggle}
           className={`
             w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium
-            text-zinc-500 hover:text-white hover:bg-white/5 transition-all duration-150
+            text-zinc-400 hover:text-white hover:bg-white/5 transition-all duration-150
             ${collapsed ? 'justify-center' : ''}
           `}
         >
-          <svg 
-            className={`w-4 h-4 transition-transform duration-300 ${collapsed ? 'rotate-180' : ''}`} 
-            fill="none" 
-            viewBox="0 0 24 24" 
-            stroke="currentColor" 
+          <svg
+            className="w-4 h-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
             strokeWidth={1.5}
           >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15 19l-7-7 7-7"
+            />
           </svg>
-          {!collapsed && <span>Collapse</span>}
+
+          {!collapsed && (
+            <span>
+              Collapse
+            </span>
+          )}
         </button>
       </div>
     </aside>

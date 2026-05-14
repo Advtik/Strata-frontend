@@ -117,18 +117,71 @@ export default function RouteDetailSidebar({ collapsed, onToggle, activeTab = 'b
 
       {/* Bottom Section */}
       <div className="p-3 border-t border-white/5 space-y-1">
+
         {bottomItems.map((item) => (
-          <button
-            key={item.label}
-            className={`
-              w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium
-              text-zinc-400 hover:text-white hover:bg-white/5 transition-all duration-150
-              ${collapsed ? 'justify-center' : ''}
-            `}
-          >
-            {item.icon}
-            {!collapsed && <span>{item.label}</span>}
-          </button>
+
+          item.label === "Documentation" ? (
+
+            <a
+              href="/docs"
+              key={item.label}
+              className={`
+                w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium
+                text-zinc-400 hover:text-white hover:bg-white/5 transition-all duration-150
+                ${collapsed ? 'justify-center' : ''}
+              `}
+            >
+              {item.icon}
+
+              {!collapsed && (
+                <span>
+                  Documentation
+                </span>
+              )}
+            </a>
+
+          ) : item.label === "Feedback" ? (
+
+            <a
+              href="https://x.com/adwiteekk"
+              target="_blank"
+              rel="noopener noreferrer"
+              key={item.label}
+              className={`
+                w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium
+                text-zinc-400 hover:text-white hover:bg-white/5 transition-all duration-150
+                ${collapsed ? 'justify-center' : ''}
+              `}
+            >
+              {item.icon}
+
+              {!collapsed && (
+                <span>
+                  Send Feedback
+                </span>
+              )}
+            </a>
+
+          ) : (
+
+            <button
+              key={item.label}
+              className={`
+                w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium
+                text-zinc-400 hover:text-white hover:bg-white/5 transition-all duration-150
+                ${collapsed ? 'justify-center' : ''}
+              `}
+            >
+              {item.icon}
+
+              {!collapsed && (
+                <span>
+                  {item.label}
+                </span>
+              )}
+            </button>
+
+          )
         ))}
 
         {/* Collapse Button */}
@@ -140,10 +193,25 @@ export default function RouteDetailSidebar({ collapsed, onToggle, activeTab = 'b
             ${collapsed ? 'justify-center' : ''}
           `}
         >
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+          <svg
+            className="w-4 h-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={1.5}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15 19l-7-7 7-7"
+            />
           </svg>
-          {!collapsed && <span>Collapse</span>}
+
+          {!collapsed && (
+            <span>
+              Collapse
+            </span>
+          )}
         </button>
       </div>
     </aside>
