@@ -105,7 +105,7 @@ export default function Navbar() {
     },
 
     {
-      name: 'Docs',
+      name: 'Documentation',
       href: '/docs'
     },
   ];
@@ -115,7 +115,7 @@ export default function Navbar() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <div className="flex items-center justify-between h-18">
+        <div className="grid grid-cols-[auto_1fr_auto] items-center h-18">
 
           {/* Brand */}
           <div className="flex items-center gap-2">
@@ -135,7 +135,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center justify-center gap-10">
 
             {navLinks.map((link) => (
               <a
@@ -149,20 +149,19 @@ export default function Navbar() {
           </div>
 
           {/* Desktop CTA */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-2 justify-self-end">
 
             <a
-              onClick={handleGithubLogin}
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 cursor-pointer"
-            >
-              Sign in with GitHub
-            </a>
-
-            <a
-              href="/docs"
+              href="https://github.com/advtik/strata"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium border border-border rounded-lg hover:bg-secondary transition-all duration-200"
             >
-              Documentation
+              <GitHubIcon />
+
+              <span>
+                Repository
+              </span>
             </a>
 
             <a
@@ -179,11 +178,12 @@ export default function Navbar() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 text-muted-foreground hover:text-foreground"
+            className="md:hidden p-2 text-muted-foreground hover:text-foreground justify-self-end"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
           </button>
+
         </div>
 
         {/* Mobile Navigation */}
@@ -206,17 +206,16 @@ export default function Navbar() {
               <div className="pt-4 border-t border-border flex flex-col gap-3">
 
                 <a
-                  onClick={handleGithubLogin}
-                  className="text-sm text-muted-foreground hover:text-foreground cursor-pointer"
-                >
-                  Sign in with GitHub
-                </a>
-
-                <a
-                  href="/docs"
+                  href="https://github.com/advtik/strata"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium border border-border rounded-lg hover:bg-secondary transition-all duration-200"
                 >
-                  Start with Documentation
+                  <GitHubIcon />
+
+                  <span>
+                    Repository
+                  </span>
                 </a>
 
                 <a
