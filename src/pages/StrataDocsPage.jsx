@@ -794,6 +794,9 @@ export default function StrataDocsPage() {
                   <Layers className="w-4 h-4" />
                   Architecture
                 </button>
+                <a href="/" className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-teal-400 text-white text-sm font-medium transition-all shadow-lg ">
+                  Get Started <ArrowRight className="w-4 h-4" />
+                </a>
               </div>
             </motion.div>
           </Section>
@@ -1320,6 +1323,16 @@ export default function StrataDocsPage() {
 
             <div className="space-y-3">
               {[
+                {
+                  problem: "GitHub login failed",
+                  causes: [
+                    "Third-party cookies are blocked by the browser",
+                    "Browser privacy extensions are blocking OAuth sessions",
+                    "Using incognito/private browsing mode",
+                    "OAuth popup was closed or interrupted"
+                  ],
+                  fix: "Allow third-party cookies for this site and retry GitHub login. Disable strict privacy shields/extensions temporarily if needed, then refresh the page and try again."
+                },
                 {
                   problem: "401 Unauthorized",
                   causes: ["API key missing from request headers", "Wrong header name (must be x-api-key, lowercase)", "Key was revoked"],

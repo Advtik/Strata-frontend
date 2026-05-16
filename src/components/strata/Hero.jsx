@@ -1,4 +1,5 @@
 import apiClient from '../../api/client';
+import { useState } from 'react';
 
 const GitHubIcon = () => (
   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -17,6 +18,17 @@ const ArrowRightIcon = () => (
       strokeLinejoin="round"
       strokeWidth={2}
       d="M17 8l4 4m0 0l-4 4m4-4H3"
+    />
+  </svg>
+);
+
+const CloseIcon = () => (
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M6 18L18 6M6 6l12 12"
     />
   </svg>
 );
@@ -55,6 +67,9 @@ function MockLineChart() {
 
   const areaD = `${pathD} L ${toX(points.length - 1)} ${h} L 0 ${h} Z`;
 
+
+
+  
   return (
     <div className="relative">
       <div className="px-4 py-3 border-b border-white/5">
@@ -79,7 +94,7 @@ function MockLineChart() {
                 y2={toY(v)}
                 stroke="rgba(255,255,255,0.04)"
                 strokeWidth={1}
-              />
+                />
 
               <text
                 x={-2}
@@ -87,7 +102,7 @@ function MockLineChart() {
                 textAnchor="end"
                 fontSize={8}
                 fill="rgba(161,161,170,0.5)"
-              >
+                >
                 {v}
               </text>
             </g>
@@ -101,7 +116,7 @@ function MockLineChart() {
             stroke="rgba(239,68,68,0.55)"
             strokeWidth={1.5}
             strokeDasharray="5 4"
-          />
+            />
 
           <text
             x={w - 2}
@@ -109,7 +124,7 @@ function MockLineChart() {
             textAnchor="end"
             fontSize={8}
             fill="rgba(239,68,68,0.8)"
-          >
+            >
             Route Limit
           </text>
 
@@ -129,27 +144,27 @@ function MockLineChart() {
             strokeWidth={2}
             strokeLinejoin="round"
             strokeLinecap="round"
-          />
+            />
 
           {points.map((v, i) => (
             <circle
-              key={i}
-              cx={toX(i)}
-              cy={toY(v)}
-              r={3}
-              fill="#10b981"
+            key={i}
+            cx={toX(i)}
+            cy={toY(v)}
+            r={3}
+            fill="#10b981"
             />
           ))}
 
           {times.map((t, i) => (
             i % 2 === 0 && (
               <text
-                key={i}
-                x={toX(i)}
-                y={h + 16}
-                textAnchor="middle"
-                fontSize={8}
-                fill="rgba(161,161,170,0.5)"
+              key={i}
+              x={toX(i)}
+              y={h + 16}
+              textAnchor="middle"
+              fontSize={8}
+              fill="rgba(161,161,170,0.5)"
               >
                 {t}
               </text>
@@ -188,17 +203,17 @@ function MockStats() {
       color: 'text-zinc-400'
     },
   ];
-
+  
   return (
     <div className="grid grid-cols-4 gap-2 px-4 py-3 border-t border-white/5">
       {stats.map((s) => (
         <div
-          key={s.label}
-          className="flex items-center gap-2 p-2 rounded-lg bg-white/[0.02] border border-white/5"
+        key={s.label}
+        className="flex items-center gap-2 p-2 rounded-lg bg-white/[0.02] border border-white/5"
         >
           <div
             className={`w-6 h-6 rounded-md bg-white/5 flex items-center justify-center text-[10px] ${s.color}`}
-          >
+            >
             {s.icon}
           </div>
 
@@ -223,14 +238,14 @@ function MockLoadBalancer() {
     { url: 'backend-b', pct: 84, state: 'healthy' },
     { url: 'backend-c', pct: 6, state: 'half_open' },
   ];
-
+  
   const color = (state) =>
     state === 'open'
-      ? 'from-red-500/30 to-red-500/80'
-      : state === 'half_open'
-      ? 'from-amber-500/30 to-amber-500/80'
-      : 'from-emerald-500/30 to-emerald-500/80';
-
+  ? 'from-red-500/30 to-red-500/80'
+  : state === 'half_open'
+  ? 'from-amber-500/30 to-amber-500/80'
+  : 'from-emerald-500/30 to-emerald-500/80';
+  
   return (
     <div className="border-t border-white/5">
       <div className="px-4 py-3 border-b border-white/5">
@@ -254,7 +269,7 @@ function MockLoadBalancer() {
               <div
                 className={`h-full rounded bg-gradient-to-r ${color(b.state)} transition-all`}
                 style={{ width: `${b.pct}%` }}
-              />
+                />
             </div>
           </div>
         ))}
@@ -289,7 +304,7 @@ function MockLoadBalancer() {
 }
 
 export default function Hero() {
-
+  
   const handleGithubLogin = async () => {
     try {
       const response = await apiClient.get("/auth/github/login");
@@ -298,7 +313,8 @@ export default function Hero() {
       console.error("GitHub login failed:", error);
     }
   };
-
+  const [showCookieNotice, setShowCookieNotice] = useState(true);
+  
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
 
@@ -311,6 +327,51 @@ export default function Hero() {
         className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-accent/5 rounded-full blur-3xl animate-pulse-slow"
         style={{ animationDelay: '1.5s' }}
       />
+
+      {/* Floating Cookie Notice */}
+      {showCookieNotice && (
+        <div className="absolute top-24 right-4 sm:right-8 z-20 max-w-xs animate-in fade-in slide-in-from-top-2 duration-300">
+
+          <div className="
+            relative
+            rounded-xl
+            border border-amber-500/20
+            bg-[#111111]/80
+            backdrop-blur-xl
+            px-4 py-3
+            shadow-2xl
+          ">
+
+            <button
+              onClick={() => setShowCookieNotice(false)}
+              className="absolute top-2 right-2 p-1 rounded-md text-zinc-500 hover:text-white hover:bg-white/5 transition-all duration-200"
+            >
+              <CloseIcon />
+            </button>
+
+            <div className="flex items-start gap-2 pr-5">
+
+              <div className="w-2 h-2 rounded-full bg-amber-400 mt-1.5 shrink-0 animate-pulse" />
+
+              <div>
+
+                <p className="text-[11px] font-medium text-amber-300">
+                  Login Tip
+                </p>
+
+                <p className="mt-1 text-[11px] leading-relaxed text-zinc-400">
+                  If GitHub login fails, disable
+                  <span className="text-zinc-200">
+                    {' '}third-party cookie blocking
+                  </span>
+                  {' '}in your browser. OAuth sessions may not work correctly when external auth cookies are blocked.
+                </p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
 
@@ -352,6 +413,7 @@ export default function Hero() {
               className="inline-flex items-center gap-2 px-6 py-3 text-base font-medium bg-foreground text-background rounded-lg hover:bg-foreground/90 transition-all duration-200 group cursor-pointer"
             >
               <GitHubIcon />
+
               <span>
                 Continue with GitHub
               </span>
