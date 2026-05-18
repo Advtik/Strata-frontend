@@ -30,7 +30,7 @@ import rateLimitGraph from "../assets/docs/rate-limit-graph.png";
 // ─────────────────────────────────────────────
 // CONSTANTS
 // ─────────────────────────────────────────────
-const PROXY_BASE = "https://strata-proxy.onrender.com";
+const PROXY_BASE = "https://strata-proxy-m10y.onrender.com";
 
 const NAV_SECTIONS = [
   { id: "intro",        label: "Introduction",       icon: BookOpen },
@@ -975,7 +975,7 @@ export default function StrataDocsPage() {
                   The full key value is displayed exactly once after generation. Strata stores only a hash. Copy it before closing the modal.
                 </Callout>
                 <p className="text-sm text-zinc-400 leading-relaxed">Pass the key in every proxied request using the <code className="text-blue-300 font-mono text-xs bg-white/5 px-1.5 py-0.5 rounded">x-api-key</code> header:</p>
-                <CodeBlock language="http" code={`GET /proxy/payments/users HTTP/1.1\nHost: strata-proxy.onrender.com\nx-api-key: sk_live_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`} />
+                <CodeBlock language="http" code={`GET /proxy/payments/users HTTP/1.1\nHost: strata-proxy-m10y.onrender.com\nx-api-key: sk_live_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`} />
               </div>
             </div>
 
