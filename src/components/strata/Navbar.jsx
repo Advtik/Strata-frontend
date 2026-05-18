@@ -42,8 +42,9 @@ export default function Navbar() {
     try {
 
       const response = await apiClient.get("/auth/github/login");
-
-      window.location.href = response.data.url;
+      console.log(response.data)
+      console.log(response.data.url)
+      // window.location.href = response.data.url;
 
     } catch (error) {
 
