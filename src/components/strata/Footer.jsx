@@ -82,7 +82,7 @@ export default function Footer() {
 
       {
         label: "Proxy Endpoint",
-        href: "https://strata-proxy.onrender.com",
+        href: "https://strata-proxy-m10y.onrender.com",
       },
     ],
 
